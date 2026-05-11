@@ -8,3 +8,4 @@ public class NameSortingStrategy implements SortingStrategy {
         users.sort(Comparator.comparing(user -> user.getName()));
     }
 }
+
