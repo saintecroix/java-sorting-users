@@ -28,39 +28,4 @@ public class User {
         return password.length();
     }
 }
-    /*[Model] Builder JAV-3*/
-    public static class Builder {
-        private int id;
-        private String name;
-        private String password;
-        private String email;
-
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder id(int id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Builder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public User build() {
-            return new User(id, name, password, email);
-        }
-    }
-}
+  
