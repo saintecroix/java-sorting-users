@@ -27,16 +27,15 @@ public class User {
     public int getPasswordLength() {
         return password.length();
     }
-    /*[Model] Builder JAV-3*/
+    public static Builder builder() {
+            return new Builder();
+        }
+/*[Model] Builder JAV-3*/
     public static class Builder {
         private int id;
         private String name;
         private String password;
         private String email;
-
-        public static Builder builder() {
-            return new Builder();
-        }
 
         public Builder id(int id) {
             this.id = id;
