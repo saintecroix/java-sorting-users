@@ -1,3 +1,5 @@
+package model;
+
 /*[Model] User JAV-1*/
 public class User {
     private final int id;
