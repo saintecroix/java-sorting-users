@@ -1,11 +1,11 @@
 /*[Model] User JAV-1*/
 public class User {
-    private int id;
-    private String name;
-    private String password;
-    private String email;
+    private final int id;
+    private final String name;
+    private final String password;
+    private final  String email;
     
-    public User(int id, String name, String password, String email) {
+    private User(int id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
