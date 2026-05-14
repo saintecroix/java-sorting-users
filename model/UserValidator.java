@@ -1,3 +1,5 @@
+package model;
+
 public class UserValidator {
     public void validatePassword(String password) throws ValidationException {
         if(password.length() < 8){

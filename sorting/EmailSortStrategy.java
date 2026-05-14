@@ -1,5 +1,6 @@
-package input;
-import sorting.SortingStrategy;
+package sorting;
+import model.User;
+
 import java.util.Comparator;
 import java.util.List;
 
