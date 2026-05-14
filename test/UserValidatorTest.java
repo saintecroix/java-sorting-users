@@ -6,7 +6,7 @@ import model.ValidationException;
 public class UserValidatorTest {
     public static void main(String[] args) {
         try {
-            new UserValidator().validatePassword("123");
+            new UserValidator().validatePassword(3);
             System.out.println("Не работает");
         } catch (ValidationException e) {
             System.out.println("Успешно");
