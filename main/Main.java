@@ -14,27 +14,63 @@ import sorting.SortingStrategy;
 
 void main() {
     Scanner scanner = new Scanner(System.in);
+    System.out.println("\n=== JAVA SORTING USERS DEMO ===");
 
-    IO.println("=== JAVA SORTING USERS DEMO ===\n");
+    while (true) {
+        System.out.println("1. Сгенерировать и отсортировать пользователей");
+        System.out.println("0. Выйти");
+        System.out.print("Ваш выбор: ");
 
-    List<User> users = generateUsers(scanner);
-    printUsers(users);
+        int mainChoice = readInt(scanner, 0, 1);
+        if (mainChoice == 0) {
+            System.out.println("До свидания!");
+            break;
+        }
 
-    SortingStrategy sorter = selectSortingStrategy(scanner);
-    IO.println("\n--- Сортировка " + sorter.getClass().getSimpleName() + " ---");
-    sorter.sort(users);
-    printUsers(users);
+        System.out.print("Введите количество пользователей(до 100): ");
+        int count = readInt(scanner, 1, 100);
 
-    List<User> validUsers = validateUsers(users);
-    saveUsers(validUsers, scanner);
+        List<User> users = generateUsers(scanner, count);
+        if (users.isEmpty()) {
+            System.out.println("Не удалось сгенерировать пользователей.");
+            continue;
+        }
 
+        System.out.println("\n--- Сгенерированные пользователи ---");
+        printUsers(users);
+
+        SortingStrategy sorter = selectSortingStrategy(scanner);
+        System.out.println("\n--- Сортировка " + sorter.getClass().getSimpleName() + " ---");
+        sorter.sort(users);
+        printUsers(users);
+
+        List<User> validUsers = validateUsers(users);
+
+        saveUsers(validUsers, scanner);
+    }
     scanner.close();
 }
 
-private static List<User> generateUsers(Scanner scanner) {
+private static int readInt(Scanner scanner, int min, int max) {
+    while (true) {
+        if (scanner.hasNextInt()) {
+            int value = scanner.nextInt();
+            if (value >= min && value <= max) {
+                scanner.nextLine();
+                return value;
+            } else {
+                System.out.printf("Ошибка: введите число от %d до %d: ", min, max);
+            }
+        } else {
+            System.out.print("Ошибка: введите целое число: ");
+            scanner.next();
+        }
+    }
+}
+
+private static List<User> generateUsers(Scanner scanner, int count) {
     IO.print("Источник (1-File, 2-Random, 3-Terminal): ");
-    int choice = scanner.nextInt();
-    scanner.nextLine();
+    int choice = readInt(scanner, 1, 3);
 
     InputStrategy strategy = switch (choice) {
         case 1 -> new FileInputStrategy("users.csv");
@@ -42,14 +78,12 @@ private static List<User> generateUsers(Scanner scanner) {
         case 3 -> new TerminalInputStrategy(scanner);
         default -> new RandomInputStrategy();
     };
-
-    return strategy.generate(5);
+    return strategy.generate(count);
 }
 
 private static SortingStrategy selectSortingStrategy(Scanner scanner) {
     IO.print("Сортировка (1-Name, 2-Email, 3-Password): ");
-    int choice = scanner.nextInt();
-    scanner.nextLine();
+    int choice = readInt(scanner, 1, 3);
 
     return switch (choice) {
         case 1 -> new NameSortingStrategy();
