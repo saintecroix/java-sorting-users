@@ -1,6 +1,5 @@
 package model;
 
-/*[Model] User JAV-1*/
 public class User {
     private final int id;
     private final String name;
@@ -32,7 +31,7 @@ public class User {
     public static Builder builder() {
             return new Builder();
         }
-/*[Model] Builder JAV-3*/
+
     public static class Builder {
         private int id;
         private String name;
